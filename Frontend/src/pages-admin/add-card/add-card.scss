@@ -1,0 +1,116 @@
+.add-card {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+  
+    &__background {
+      z-index: -1;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.7); /* Escurece o fundo para destacar o formulário */
+    }
+  
+    &__form {
+      z-index: 1;
+      background-color: rgba(42, 38, 60, 0.9); /* Fundo translúcido */
+      padding: 3rem 4rem;
+      border-radius: 1rem;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 50rem;
+      width: 100%;
+    }
+  
+    &__title {
+      font-size: 2.4rem;
+      font-weight: bold;
+      margin-bottom: 2rem;
+      color: var(--primary-color);
+      text-align: center;
+    }
+  
+    &__form-group {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+  
+      & > .add-card__label {
+        font-size: 1.6rem;
+        color: var(--primary-color);
+      }
+  
+      & > .add-card__input {
+        width: 100%;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        border: none;
+        background-color: rgba(255, 255, 255, 0.1);
+        color: var(--primary-color);
+        font-size: 1.6rem;
+  
+        &::placeholder {
+          color: rgba(255, 255, 255, 0.5);
+        }
+  
+        &:focus {
+          outline: 2px solid var(--primary-color);
+          background-color: rgba(255, 255, 255, 0.2);
+        }
+      }
+  
+      .add-card__textarea {
+        resize: none;
+        height: 8rem;
+      }
+    }
+  
+    &__button {
+      width: 100%;
+      padding: 1rem 0;
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--primary-color);
+      background-color: #613f9c;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+  
+      &:hover {
+        background-color: #532d85;
+      }
+    }
+
+    .link {
+        width: 100%; 
+    }
+
+    &__button-cancel {
+      width: 100%;
+      padding: 1rem 0;
+      margin-top: 1rem;
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--primary-color);
+      background-color: rgba(80, 0, 0, 0.2);
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+  
+      &:hover {
+        background-color: rgba(177, 0, 0, 0.493);
+      }
+    }
+  }
+  

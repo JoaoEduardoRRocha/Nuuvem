@@ -1,0 +1,57 @@
+.navbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    background: linear-gradient(360deg, rgba(42,38,60,1) 57%, rgba(56,54,76,1) 100%);
+
+    &__logo-name-content {
+        display: flex;
+        align-items: center;
+    }
+
+    &__logo {
+        width: 7.5rem;
+    }
+
+    &__logo-name {
+        font-size: 2rem;
+        margin-left: 1rem;
+        font-weight: 800;
+    }
+
+    &__nav-options {
+        display: flex;
+        align-content: center;
+    }
+
+    &__options {
+        margin: 1rem;
+    }
+
+    &__input-search {
+        background-color: #454361;
+        border: none;
+        padding: 0 1rem;
+        color: var(--primary-color);
+        border-radius: 0.5rem;
+    }
+
+    &__input-search::placeholder {
+        color: #d3d3d3;
+    }
+
+    &__btn-add-itens {
+        color: var(--primary-color);
+        padding: 1rem;
+        background-color: #454361;
+        border: none;
+        border-radius: 0.5rem;
+    }
+
+    &__btn-add-itens:hover {
+        filter: brightness(1.1);
+        cursor: pointer;
+    }
+}
+
