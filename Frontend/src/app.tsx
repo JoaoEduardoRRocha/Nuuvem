@@ -1,16 +1,20 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/home/home";
-import Signup from "./pages/signup/signup";
-import Login from "./pages/login/login";
-import HomeAdmin from "./pages-admin/home-admin/home-admin";
-import AddItem from "./pages-admin/add-card/add-card";
-import "./app.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import Home from "./pages/home/home"
+import Signup from "./pages/signup/signup"
+import Login from "./pages/login/login"
+import HomeAdmin from "./pages-admin/home-admin/home-admin"
+import AddItem from "./pages-admin/add-card/add-card"
+import "./app.css"
+import Main from './pages/main/main'
+import LoadingScreen from './components/loading-screen/loading-screen'
 
 function App() {
   return (
     <Router>
       <div className="app">
         <Routes>
+          <Route path="/teste" element={<LoadingScreen />} />
+          <Route path="/" element={<Main />} />
           <Route path="/home" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
@@ -19,7 +23,7 @@ function App() {
         </Routes>
       </div>
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App

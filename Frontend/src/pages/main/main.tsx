@@ -7,11 +7,11 @@ import "../../app.css"
 import { getUser } from "../../auth/auth-helper"
 import LoadingScreen from "../../components/loading-screen/loading-screen"
 
-function Home() {
+function Main() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [isAdmin, setIsAdmin] = useState(false)
   const [loading, setLoading] = useState(true)
-  const [heroLoading, setHeroLoading] = useState(true)
+  const [contentLoading, setContentLoading] = useState(true) 
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -38,10 +38,10 @@ function Home() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setHeroLoading(false) 
-    }, 1000)
+      setContentLoading(false)
+    }, 1000) 
 
-    return () => clearTimeout(timer) 
+    return () => clearTimeout(timer)
   }, [])
 
   if (loading) return <LoadingScreen />
@@ -49,8 +49,8 @@ function Home() {
   return (
     <div className="app">
       <Navbar />
-      {heroLoading ? (
-        <LoadingScreen /> 
+      {contentLoading ? (
+        <LoadingScreen />
       ) : (
         <>
           <img
@@ -59,11 +59,11 @@ function Home() {
             alt="Hero Background"
           />
           <HeroSection />
+          <Section />
         </>
       )}
-      <Section />
     </div>
   )
 }
 
-export default Home
+export default Main

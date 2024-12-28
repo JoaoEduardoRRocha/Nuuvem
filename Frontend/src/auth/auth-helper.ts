@@ -18,8 +18,8 @@ export const getUser = async (): Promise<UserModel | null> => {
   if (!token) return null
 
   try {
-    const response = await axios.get(`http://localhost:5050/api/auth/me`, {
-      headers: { Authorization: `Bearer ${token}` },
+    const response = await axios.get(`http://localhost:5050/api/users/me`, {
+      headers: { 'access-token': token },
     })
     return response.data as UserModel
   } catch (error) {

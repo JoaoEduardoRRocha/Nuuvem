@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react"
 import { Navigate } from "react-router-dom"
-import HeroSection from '../../components/hero-section/hero-section'
-import NavbarAdmin from '../../components-admin/navbar-admin/navbar-admin'
-import Section from '../../components/section/section'
-import '../../app.css'
-import { getUser } from '../../auth/auth-helper'
-import { UserModel } from '../../auth/models'
-import LoadingScreen from '../../components/loading-screen/loading-screen'
+import HeroSection from "../../components/hero-section/hero-section"
+import NavbarAdmin from "../../components-admin/navbar-admin/navbar-admin"
+import Section from "../../components/section/section"
+import "../../app.css"
+import { getUser } from "../../auth/auth-helper"
+import LoadingScreen from "../../components/loading-screen/loading-screen"
 
 function HomeAdmin() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -15,24 +14,29 @@ function HomeAdmin() {
 
   useEffect(() => {
     const checkAuth = async () => {
-      const user: UserModel | null = await getUser()
-      if (user) {
-        setIsAuthenticated(true)
-        setIsAdmin(user.isAdmin)
-      }
-      setLoading(false)
+      const user = await getUser()
+      setIsAuthenticated(!!user)
+      setIsAdmin(user?.isAdmin || false)
+      
+      setTimeout(() => {
+        setLoading(false)
+      }, 1000)
     }
     checkAuth()
   }, [])
 
   if (loading) return <LoadingScreen />
   if (!isAuthenticated) return <Navigate to="/login" />
-  if (!isAdmin) return <Navigate to="/not-authorized" />
+  if (!isAdmin) return <Navigate to="/" />
 
   return (
     <div className="app">
       <NavbarAdmin />
-      <img className="hero-img" src="https://wallpapers.com/images/hd/purple-gaming-sfiq72g5kksu8khe.jpg" />
+      <img
+        className="hero-img"
+        src="https://wallpapers.com/images/hd/purple-gaming-sfiq72g5kksu8khe.jpg"
+        alt="Background"
+      />
       <HeroSection />
       <Section />
     </div>

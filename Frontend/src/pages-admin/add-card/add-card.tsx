@@ -1,34 +1,38 @@
-import React, { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
-import BackgroundImg from '../../assets/wallpeaper2.jpg';
-import './add-card.scss';
-import axios from "axios";
-import { Link } from "react-router-dom";
-import { getUser } from '../../auth/auth-helper'
+import React, { useEffect, useState } from "react"
+import { Navigate } from "react-router-dom"
+import BackgroundImg from "../../assets/wallpeaper2.jpg"
+import "./add-card.scss"
+import axios from "axios"
+import { Link } from "react-router-dom"
+import { getUser } from "../../auth/auth-helper"
+import LoadingScreen from "../../components/loading-screen/loading-screen"
 
 function AddCard() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [isAdmin, setIsAdmin] = useState(false)
+  const [loading, setLoading] = useState(true)
+  const [formSubmitting, setFormSubmitting] = useState(false)
   const [formData, setFormData] = useState({
-    name: '',
-    gender: '',
-    description: '',
-    price: '',
-    discountPrice: '',
-    image: '',
-  });
+    name: "",
+    gender: "",
+    description: "",
+    price: "",
+    discountPrice: "",
+    image: "",
+  })
 
   useEffect(() => {
     const checkAuth = async () => {
-      const user = await getUser();
-      setIsAuthenticated(!!user);
-      setLoading(false);
+      const user = await getUser()
+      setIsAuthenticated(!!user)
+      setIsAdmin(user?.isAdmin || false);
+      setTimeout(() => setLoading(false), 1000);
     };
     checkAuth();
   }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { id, value } = e.target;
+    const { id, value } = e.target
     setFormData((prevData) => ({
       ...prevData,
       [id]: value,
@@ -36,38 +40,41 @@ function AddCard() {
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
+    const file = e.target.files?.[0]
     if (file) {
-      const reader = new FileReader();
+      const reader = new FileReader()
       reader.onloadend = () => {
         setFormData((prevData) => ({
           ...prevData,
           image: reader.result as string,
         }));
       };
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(file)
     }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    setFormSubmitting(true);
     try {
-      const response = await axios.post('http://localhost:5173/api/games/', formData, {
+      await axios.post("http://localhost:5173/api/games/", formData, {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       });
-      alert('Produto adicionado com sucesso!');
-      console.log(response.data);
+      alert("Produto adicionado com sucesso!")
     } catch (error) {
-      console.error('Erro ao adicionar produto:', error);
-      alert('Houve um erro ao adicionar o produto.');
+      console.error("Erro ao adicionar produto:", error)
+      alert("Houve um erro ao adicionar o produto.")
+    } finally {
+      setTimeout(() => setFormSubmitting(false), 1000);
     }
   };
 
-  if (loading) return <div>Loading...</div>;
-  if (!isAuthenticated) return <Navigate to="/login" />;
+  if (loading || formSubmitting) return <LoadingScreen />
+
+  if (!isAuthenticated) return <Navigate to="/login" />
+  if (!isAdmin) return <Navigate to="/" />
 
   return (
     <div className="add-card">
