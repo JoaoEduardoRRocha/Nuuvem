@@ -20,7 +20,7 @@ function HomeAdmin() {
       
       setTimeout(() => {
         setLoading(false)
-      }, 1000)
+      }, 500)
     }
     checkAuth()
   }, [])
@@ -32,11 +32,6 @@ function HomeAdmin() {
   return (
     <div className="app">
       <NavbarAdmin />
-      <img
-        className="hero-img"
-        src="https://wallpapers.com/images/hd/purple-gaming-sfiq72g5kksu8khe.jpg"
-        alt="Background"
-      />
       <HeroSection />
       <Section />
     </div>

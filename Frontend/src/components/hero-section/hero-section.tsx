@@ -1,54 +1,98 @@
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-import './hero-section.scss';
-
-import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import React, { useState, useEffect } from "react"
+import "./hero-section.scss"
+import Fornite from "../../assets/fornite.png"
+import Arena from "../../assets/arena-lol.png"
+import WildRift from "../../assets/wildrift.png"
 
 function HeroSection() {
+  const images = [
+    {
+      src: Fornite,
+      name: "Fornite",
+      description:
+      "Explore um mundo épico! Lute em uma ilha, onde você será desafiado a encontrar recursos e confrontar seus inimigos para obtê-los!"
+    },
+    {
+      src: Arena,
+      name: "LOL: nova arena!",
+      description:
+        "Prepare-se para a nova arena de LOL! Atualizações épicas, equipes poderosas e desafios incríveis esperam por você. Domine cada confronto!"
+    },
+    {
+      src: WildRift,
+      name: "LOL: novo modo de jogo!",
+      description:
+        "Descubra o novo modo de jogo no Wild Rift! Estratégia, ação e glórias épicas esperam por você em batalhas inesquecíveis. Seja uma lenda!"
+    }
+  ]
+  
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
+
+  const nextSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length)
+    resetInterval()
+  }
+
+  const prevSlide = () => {
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 1 + images.length) % images.length
+    )
+    resetInterval()
+  }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!isPaused) {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length)
+      }
+    }, 5000)
+
+    return () => clearInterval(interval)
+  }, [isPaused])
+
+  const resetInterval = () => {
+    setIsPaused(true)
+    setTimeout(() => setIsPaused(false), 100)
+  }
+
   return (
     <div className="hero-section-container">
-      <div className='hero-section-container__swiper-container'>
-        <Swiper
-            modules={[Navigation, Pagination, Autoplay]}
-            navigation
-            pagination={{ clickable: true }}
-            autoplay={{ delay: 6000 }}
-            loop={true}
-            className="hero-swiper"
-        >
-            <SwiperSlide>
-            <div className='hero-swiper__cards'>
-                <img className='hero-swiper__slider-img' src="https://i.pinimg.com/736x/a6/b9/c9/a6b9c90af49c34c5d19a2908161d3dfe.jpg" alt="Wallpeaper 1" />
-                <div>
-                    <button className='hero-swiper__btn-buy'>Comprar</button>
-                    <button className='hero-swiper__btn-know-more'>Saiba mais</button>
-                </div>
+      <div className="hero-section-slider">
+        <div>
+          <img
+            className="hero-section-slider__hero-img"
+            src={images[currentIndex].src}
+            alt={`Imagem de ${images[currentIndex].name}`}
+          />
+        </div>
+
+        <div className="hero-section-slider__details">
+          <h1 className="hero-section-slider__name">
+            {images[currentIndex].name}
+          </h1>
+          <p className="hero-section-slider__description">
+            {images[currentIndex].description}
+          </p>
+
+          <div className="hero-section-slider__know-more">
+            <button className="hero-section-slider__know-more-btn">
+              Saiba mais
+            </button>
+
+            <div className="hero-section-slider__next-prev-container">
+              <button className="hero-section-slider__prev" onClick={prevSlide}>
+                Anterior
+              </button>
+              <button className="hero-section-slider__next" onClick={nextSlide}>
+                Próximo
+              </button>
             </div>
-            </SwiperSlide>
-            <SwiperSlide>
-            <div className='hero-swiper__cards'>
-                <img className='hero-swiper__slider-img' src="https://wallpapersmug.com/download/3840x2160/13377a/cyberpunk-city-buildings-art.jpg" alt="Wallpeaper 2" />
-                <div>
-                    <button className='hero-swiper__btn-buy'>Comprar</button>
-                    <button className='hero-swiper__btn-know-more'>Saiba mais</button>
-                </div>
-            </div>
-            </SwiperSlide>
-            <SwiperSlide>
-            <div className='hero-swiper__cards'>
-                <img className='hero-swiper__slider-img' src="https://img.freepik.com/free-photo/illustration-rain-futuristic-city_23-2151406585.jpg" alt="Wallpeaper 3" />
-                <div>
-                    <button className='hero-swiper__btn-buy'>Comprar</button>
-                    <button className='hero-swiper__btn-know-more'>Saiba mais</button>
-                </div>
-            </div>
-            </SwiperSlide>
-        </Swiper>
+          </div>
+        </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default HeroSection;
+export default HeroSection

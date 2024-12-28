@@ -1,6 +1,6 @@
 require('dotenv').config({ path: require('find-config')('.env') })
 export default {
-  mongoUrl: process.env.MONGO_URL || 'mongodb://127.0.0.1:27017/santo-trafego',
+  mongoUrl: process.env.MONGO_URL || 'mongodb://127.0.0.1:27017/plataforma-de-jogos',
   port: process.env.PORT || 5050,
   mailHost: process.env.MAIL_HOST || 'sandbox.smtp.mailtrap.io',
   mailPort: process.env.MAIL_PORT || 2525,

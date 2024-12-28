@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import HeroSection from "../../components/hero-section/hero-section"
-import Navbar from "../../components/navbar/navbar"
 import Section from "../../components/section/section"
 import "../../app.css"
 import { getUser } from "../../auth/auth-helper"
 import LoadingScreen from "../../components/loading-screen/loading-screen"
+import Navbar from '../../components/navbar/navbar'
 
 function Main() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -39,7 +39,7 @@ function Main() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setContentLoading(false)
-    }, 1000) 
+    }, 500) 
 
     return () => clearTimeout(timer)
   }, [])
@@ -49,19 +49,8 @@ function Main() {
   return (
     <div className="app">
       <Navbar />
-      {contentLoading ? (
-        <LoadingScreen />
-      ) : (
-        <>
-          <img
-            className="hero-img"
-            src="https://wallpapers.com/images/hd/purple-gaming-sfiq72g5kksu8khe.jpg"
-            alt="Hero Background"
-          />
-          <HeroSection />
-          <Section />
-        </>
-      )}
+      <HeroSection />
+      <Section />
     </div>
   )
 }

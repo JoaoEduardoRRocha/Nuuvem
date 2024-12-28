@@ -5,7 +5,7 @@ import { removeToken } from "../../auth/auth-helper"
 import { FaSquarePlus } from "react-icons/fa6"
 import { GoSignOut } from "react-icons/go"
 
-function Navbar() {
+function NavbarAdmin() {
   const navigate = useNavigate()
 
   const handleLogout = () => {
@@ -14,35 +14,33 @@ function Navbar() {
   }
 
   return (
-    <div className="navbar-container">
-      <div className="navbar-container__logo-name-content">
-        <img
-          className="navbar-container__logo"
-          src={Logo}
-          alt="Logo da Nuuvem Clone"
-        />
-        <p className="navbar-container__logo-name">NUUVEM CLONE</p>
-      </div>
-      <div className="navbar-container__nav-options">
-        <p className="navbar-container__options">GAMES</p>
-        <p className="navbar-container__options">ABOUT</p>
-      </div>
-      <div>
-        <Link className="link" to="/add-card">
-          <button className="navbar-container__btn-add-itens">
-            <FaSquarePlus size={20}/>
-          </button>
-        </Link>
+    <div className="navbar-container-bg">
+      <div className="navbar-container">
+        <div className="navbar-container__logo-name-content">
+          <img
+            className="navbar-container__logo"
+            src={Logo}
+            alt="Logo da Nuuvem Clone"
+          />
+        </div>
 
-        <button
-          className="navbar-container__btn-add-itens"
-          onClick={handleLogout}
-        >
-          <GoSignOut size={20}/>
-        </button>
+        <div>
+          <Link className="link" to="/add-card">
+            <button className="navbar-container__btn-add-itens">
+              <FaSquarePlus size={20}/>
+            </button>
+          </Link>
+
+          <button
+            className="navbar-container__btn-add-itens"
+            onClick={handleLogout}
+          >
+            <GoSignOut size={20}/>
+          </button>
+        </div>
       </div>
     </div>
   )
 }
 
-export default Navbar
+export default NavbarAdmin

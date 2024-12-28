@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react"
 import { Navigate } from "react-router-dom"
-import BackgroundImg from "../../assets/wallpeaper2.jpg"
 import "./add-card.scss"
 import axios from "axios"
 import { Link } from "react-router-dom"
-import { getUser } from "../../auth/auth-helper"
+import { getToken, getUser } from "../../auth/auth-helper"
 import LoadingScreen from "../../components/loading-screen/loading-screen"
 
 function AddCard() {
@@ -26,7 +25,7 @@ function AddCard() {
       const user = await getUser()
       setIsAuthenticated(!!user)
       setIsAdmin(user?.isAdmin || false);
-      setTimeout(() => setLoading(false), 1000);
+      setTimeout(() => setLoading(false), 500);
     };
     checkAuth();
   }, []);
@@ -57,9 +56,9 @@ function AddCard() {
     e.preventDefault();
     setFormSubmitting(true);
     try {
-      await axios.post("http://localhost:5173/api/games/", formData, {
+      await axios.post("http://localhost:5050/api/games/", formData, {
         headers: {
-          "Content-Type": "application/json",
+          'access-token': getToken(),
         },
       });
       alert("Produto adicionado com sucesso!")
@@ -78,7 +77,6 @@ function AddCard() {
 
   return (
     <div className="add-card">
-      <img className="add-card__background" src={BackgroundImg} alt="Background" />
       <form className="add-card__form" onSubmit={handleSubmit}>
         <h1 className="add-card__title">Adicionar Produto</h1>
         <div className="add-card__form-group">

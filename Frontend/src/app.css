@@ -12,9 +12,9 @@
   body {
     position: relative;
     font-size: 1.8rem;
-    font-family: "Poppins", sans-serif;
+    font-family: "Montserrat", sans-serif;
     color: var(--primary-color);
-    background: linear-gradient(360deg, rgba(42,38,60,1) 57%, rgba(56,54,76,1) 100%);
+    background: rgb(17, 17, 17)
 
   }
 
