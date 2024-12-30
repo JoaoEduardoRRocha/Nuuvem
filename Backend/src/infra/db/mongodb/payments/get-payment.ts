@@ -1,5 +1,5 @@
 import { PaymentModel } from '../../../../domain/models/payment/payment'
-import { PaymentGetter } from '../../../../presentation/protocols/payments/payment.getter'
+import { PaymentGetter } from '../../../../presentation/protocols/payments/payment-getter'
 import { MongoHelper, mongoToPaymentModel } from '../helpers/mongo-helper'
 
 export class GetPaymentMongoRepository implements PaymentGetter {

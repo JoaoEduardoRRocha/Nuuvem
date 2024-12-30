@@ -4,6 +4,7 @@ import { MongoHelper, mongoToUserModel } from '../helpers/mongo-helper'
 
 export class GetUserMongoRepository implements GetUser {
   async getById(_id: string): Promise<UserModel> {
+    console.log(_id)
     const userCollection = await MongoHelper.getCollection('users')
     const user = await userCollection.findOne({ _id: new MongoHelper.ObjectId(_id) })
     if (!user) return null
