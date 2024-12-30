@@ -1,26 +1,22 @@
-import { useEffect, useState } from 'react'
-import './section.scss'
-import axios from 'axios'
-import { getToken } from '../../auth/auth-helper'
+import { useEffect, useState } from "react";
+import "./section.scss";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Section = () => {
-  const [games, setGames] = useState([])
+  const [games, setGames] = useState([]);
 
   useEffect(() => {
     const fetchGames = async () => {
       await axios
-        .get('http://localhost:5050/api/games/', {
-          headers: {
-            'access-token': getToken(),
-          },
-        })
+        .get("http://localhost:5050/api/games/")
         .then((response) => {
-          setGames(response.data as [])
+          setGames(response.data as []);
         })
-        .catch((err) => console.error(err))
-    }
-    fetchGames()
-  }, [])
+        .catch((err) => console.error(err));
+    };
+    fetchGames();
+  }, []);
 
   return (
     <section className="section-container">
@@ -39,14 +35,19 @@ const Section = () => {
               {game.description}
             </p>
             <div className="section-container__btn-card">
-              <button>Comprar</button>
-              <button>Carrinho</button>
+              <Link to={`/products/${game.id}`} className="link">
+                <button className="section-container__btn-buy">Comprar</button>
+              </Link>
+
+              <button className="section-container__btn-add-cart">
+                Carrinho
+              </button>
             </div>
           </div>
         ))}
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Section
+export default Section;

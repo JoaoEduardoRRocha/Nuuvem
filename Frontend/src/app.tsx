@@ -6,15 +6,19 @@ import HomeAdmin from "./pages-admin/home-admin/home-admin"
 import AddItem from "./pages-admin/add-card/add-card"
 import "./app.css"
 import Main from './pages/main/main'
-import LoadingScreen from './components/loading-screen/loading-screen'
+import ProductPage from './pages/product/product'
+import Success from './pages/success/success'
+import Canceled from './pages/canceled/canceled'
 
 function App() {
   return (
     <Router>
       <div className="app">
         <Routes>
-          <Route path="/teste" element={<LoadingScreen />} />
           <Route path="/" element={<Main />} />
+          <Route path="/success" element={<Success />} />
+          <Route path="/canceled" element={<Canceled />} />
+          <Route path="/products/:id" element={<ProductPage />} />
           <Route path="/home" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />

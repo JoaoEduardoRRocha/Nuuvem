@@ -1,6 +1,7 @@
 import { MongoClient, Collection, ObjectId } from 'mongodb'
 import { UserModel } from '../../../../domain/models/user/user'
 import { GameModel } from '../../../../domain/models/game/game'
+import { PaymentModel } from '../../../../domain/models/payment/payment'
 
 export const MongoHelper = {
   client: null as unknown as MongoClient,
@@ -25,7 +26,8 @@ export const MongoHelper = {
     return this.client.db().collection(name)
   },
 
-  map<T>(data: any, mapper: (doc: any) => T): T {
+  map<T>(data: any, mapper: (doc: any) => T): T | null {
+    if (!data) return null
     return mapper(data)
   },
 
@@ -36,10 +38,9 @@ export const MongoHelper = {
   ObjectId,
 }
 
-// Função que mapeia um único documento
 export const mongoToUserModel = (data: any): UserModel => {
   return {
-    id: data._id.toHexString(), // Converte o ObjectId para string
+    id: data._id.toHexString(),
     name: data.name,
     email: data.email,
     password: data.password,
@@ -75,8 +76,18 @@ export const mongoToGameModel = (data: any): GameModel => {
   }
 }
 
+export const mongoToPaymentModel = (data: any): PaymentModel => ({
+  id: data._id.toHexString(),
+  amount: data.amount,
+  currency: data.currency,
+  clientSecret: data.clientSecret,
+  createdAt: data.createdAt ? new Date(data.createdAt) : new Date(),
+})
 
-// Função que mapeia um array de documentos
+export const mongoToPaymentModelArray = (data: any[]): PaymentModel[] =>
+  data.map(mongoToPaymentModel)
+
 export const mongoToUserModelArray = (data: any[]): UserModel[] => {
   return data.map(mongoToUserModel)
 }
+

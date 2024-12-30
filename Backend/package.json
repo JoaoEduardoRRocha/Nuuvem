@@ -34,12 +34,14 @@
     "puppeteer-core": "^23.10.4",
     "qrcode-terminal": "^0.12.0",
     "socket.io": "^4.8.1",
+    "stripe": "^17.5.0",
     "validator": "^13.11.0",
     "whatsapp-web.js": "^1.23.0"
   },
   "devDependencies": {
     "@shelf/jest-mongodb": "^4.2.0",
     "@types/jest": "^29.5.11",
+    "@types/stripe": "^8.0.416",
     "eslint": "^8.54.0",
     "eslint-config-standard-with-typescript": "^40.0.0",
     "eslint-plugin-import": "^2.29.0",
