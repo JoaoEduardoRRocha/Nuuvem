@@ -13,7 +13,6 @@ export class CheckoutController {
     private readonly userGetter: UserGetter,
     private readonly gameGetter: GameGetter,
     private readonly paymentSessionCreator: PaymentSessionCreator,
-    private readonly invoiceAdder: InvoiceAdder
   ) {}
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {

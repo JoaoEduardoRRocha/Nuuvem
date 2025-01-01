@@ -11,7 +11,7 @@ function Main() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [isAdmin, setIsAdmin] = useState(false)
   const [loading, setLoading] = useState(true)
-  const [contentLoading, setContentLoading] = useState(true) 
+  const [contentLoading, setContentLoading] = useState(true)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -32,19 +32,16 @@ function Main() {
     if (!loading) {
       if (isAdmin) {
         navigate("/home-admin")
+      } else {
+        const timer = setTimeout(() => {
+          setContentLoading(false)
+        }, 500)
+        return () => clearTimeout(timer)
       }
     }
   }, [isAdmin, loading, navigate])
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setContentLoading(false)
-    }, 500) 
-
-    return () => clearTimeout(timer)
-  }, [])
-
-  if (loading) return <LoadingScreen />
+  if (loading || contentLoading) return <LoadingScreen />
 
   return (
     <div className="app">

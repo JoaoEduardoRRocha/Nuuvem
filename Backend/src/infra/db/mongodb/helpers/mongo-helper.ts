@@ -1,7 +1,6 @@
 import { MongoClient, Collection, ObjectId } from 'mongodb'
 import { UserModel } from '../../../../domain/models/user/user'
 import { GameModel } from '../../../../domain/models/game/game'
-import { PaymentModel } from '../../../../domain/models/payment/payment'
 
 export const MongoHelper = {
   client: null as unknown as MongoClient,
@@ -75,17 +74,6 @@ export const mongoToGameModel = (data: any): GameModel => {
     createdAt: data.createdAt ? new Date(data.createdAt) : new Date(),
   }
 }
-
-export const mongoToPaymentModel = (data: any): PaymentModel => ({
-  id: data._id.toHexString(),
-  amount: data.amount,
-  currency: data.currency,
-  clientSecret: data.clientSecret,
-  createdAt: data.createdAt ? new Date(data.createdAt) : new Date(),
-})
-
-export const mongoToPaymentModelArray = (data: any[]): PaymentModel[] =>
-  data.map(mongoToPaymentModel)
 
 export const mongoToUserModelArray = (data: any[]): UserModel[] => {
   return data.map(mongoToUserModel)

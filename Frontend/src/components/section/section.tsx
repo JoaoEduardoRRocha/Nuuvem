@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import "./section.scss";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { getUser } from "../../auth/auth-helper";
 
 const Section = () => {
   const [games, setGames] = useState([]);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     const fetchGames = async () => {
@@ -15,7 +17,14 @@ const Section = () => {
         })
         .catch((err) => console.error(err));
     };
+
+    const checkAdmin = async () => {
+      const user = await getUser();
+      setIsAdmin(user?.isAdmin || false);
+    };
+
     fetchGames();
+    checkAdmin();
   }, []);
 
   return (
@@ -23,7 +32,7 @@ const Section = () => {
       <h1 className="section-container__title">Jogos Disponíveis</h1>
       <div className="section-container__game-grid">
         {games.map((game: any) => (
-          <div key={game.id} className="section-container__game-card-container">
+          <div key={game._id} className="section-container__game-card-container">
             <img
               className="section-container__game-card-container__img"
               src={game.image}
@@ -35,13 +44,29 @@ const Section = () => {
               {game.description}
             </p>
             <div className="section-container__btn-card">
-              <Link to={`/products/${game.id}`} className="link">
-                <button className="section-container__btn-buy">Comprar</button>
-              </Link>
+              {!isAdmin && (
+                <>
+                  <Link to={`/products/${game.id}`} className="link">
+                    <button className="section-container__btn-buy">Comprar</button>
+                  </Link>
 
-              <button className="section-container__btn-add-cart">
-                Carrinho
-              </button>
+                  <button className="section-container__btn-add-cart">
+                    Carrinho
+                  </button>
+                </>
+              )}
+
+              {isAdmin && (
+                <>
+                  <Link to={`/edit-products/${game.id}`} className="link">
+                    <button className="section-container__btn-edit">Editar</button>
+                  </Link>
+
+                  <Link to={`/delete-products/${game.id}`} className="link">
+                    <button className="section-container__btn-delete">Excluir</button>
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         ))}

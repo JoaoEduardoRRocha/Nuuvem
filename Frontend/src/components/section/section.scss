@@ -81,10 +81,12 @@
     width: 100%;
 
     .section-container__btn-buy,
-    .section-container__btn-add-cart {
+    .section-container__btn-add-cart,
+    .section-container__btn-edit,
+    .section-container__btn-delete {
       flex: 1;
       padding: 0.7rem 1rem;
-      height: 3.5rem; /* Define uma altura fixa para os botões */
+      height: 3.5rem;
       border: none;
       border-radius: 0.5rem;
       cursor: pointer;
@@ -110,6 +112,24 @@
       &:hover {
         background-color: #444444;
         color: #fff;
+      }
+    }
+
+    .section-container__btn-edit {
+      background-color: #f39c12;
+      color: #ffffff;
+
+      &:hover {
+        background-color: #af710d;
+      }
+    }
+
+    .section-container__btn-delete {
+      background-color: #e53e3e;
+      color: #ffffff;
+
+      &:hover {
+        background-color: #c53030;
       }
     }
   }

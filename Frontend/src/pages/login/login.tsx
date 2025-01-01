@@ -91,6 +91,12 @@ function Login() {
             Cadastre-se
           </Link>
         </p>
+        <p className="login-footer">
+          Deseja continuar sem autenticação? 
+          <Link to="/" className="login-link">
+            Clique aqui
+          </Link>
+        </p>
       </div>
     </div>
   );

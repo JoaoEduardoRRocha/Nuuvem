@@ -7,8 +7,9 @@ import AddItem from "./pages-admin/add-card/add-card"
 import "./app.css"
 import Main from './pages/main/main'
 import ProductPage from './pages/product/product'
+import EditProductPage from './pages/edit-product/edit-product'
+import DeleteProductPage from './pages/delete-product/delete-product'
 import Success from './pages/success/success'
-import Canceled from './pages/canceled/canceled'
 
 function App() {
   return (
@@ -16,9 +17,10 @@ function App() {
       <div className="app">
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/success" element={<Success />} />
-          <Route path="/canceled" element={<Canceled />} />
+          <Route path="/purchased-successfully" element={<Success />} />
           <Route path="/products/:id" element={<ProductPage />} />
+          <Route path="/edit-products/:id" element={<EditProductPage />} />
+          <Route path="/delete-products/:id" element={<DeleteProductPage />} />
           <Route path="/home" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
