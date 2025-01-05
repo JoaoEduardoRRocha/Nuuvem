@@ -138,3 +138,65 @@
 .link {
   text-decoration: none;
 }
+
+
+@media (max-width: 500px) {
+  .section-container {
+    padding: 1rem;
+
+    &__title {
+      font-size: 2rem; /* Reduz o tamanho da fonte do título */
+      margin: 1.5rem 0 1rem 0;
+    }
+
+    &__game-grid {
+      grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); /* Diminui o tamanho mínimo das colunas */
+      gap: 1rem; /* Reduz o espaçamento entre os cards */
+    }
+
+    &__game-card-container {
+      padding: 0.7rem; /* Reduz o espaçamento interno */
+
+      &:hover {
+        transform: none; /* Remove o efeito de hover para evitar sobrecarga visual no mobile */
+        box-shadow: none;
+      }
+    }
+
+    &__game-card-container__img {
+      width: 100%;
+      height: 12rem; /* Reduz o tamanho da imagem */
+      border-radius: 0.3rem; /* Ajusta o arredondamento */
+      margin-bottom: 0.7rem; /* Reduz o espaçamento inferior */
+    }
+
+    &__game-name {
+      font-size: 1.4rem; /* Diminui o tamanho da fonte do nome */
+      margin-bottom: 0.2rem;
+    }
+
+    &__game-price {
+      font-size: 1.4rem; /* Diminui o tamanho da fonte do preço */
+      margin-bottom: 0.7rem;
+    }
+
+    &__game-description {
+      font-size: 1rem; /* Diminui o tamanho da fonte da descrição */
+      margin-bottom: 0.7rem;
+      -webkit-line-clamp: 2; /* Reduz o número de linhas visíveis */
+    }
+
+    &__btn-card {
+      gap: 0.5rem; /* Reduz o espaçamento entre os botões */
+
+      .section-container__btn-buy,
+      .section-container__btn-add-cart,
+      .section-container__btn-edit,
+      .section-container__btn-delete {
+        height: 3rem; /* Reduz a altura dos botões */
+        font-size: 1.2rem; /* Reduz o tamanho da fonte dos botões */
+        padding: 0.5rem 0.8rem; /* Ajusta o espaçamento interno */
+      }
+    }
+  }
+}
